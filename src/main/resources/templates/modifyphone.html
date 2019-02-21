@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Изменение позиции - Я-телефон</title>
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/styles.css}" />
+</head>
+
+<header>
+	<div class="header-row">
+		<div class="header-left">
+			<a th:href="@{/index}"><img
+				th:src="@{/img/anchor.png}" width="100" height="70" align="left" /></a>
+			<p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" />
+			</form>
+		</div>
+		<div class="header-middle">
+			<h1>Я-телефон.</h1>
+		</div>
+		<div class="header-right">
+			<p>
+				<a th:href="@{/users}">Список пользователей</a>
+			</p>
+			<p>
+				<a th:href="@{/phonerepo}">Магазин</a>
+			</p>
+		</div>
+	</div>
+</header>
+
+
+<body>
+	<div class="row">
+		<div class="col-1-2">
+			<div class="content">
+				<h2>Изменение позиции</h2>
+				<form th:action="@{/modifyphone}" th:object="${phoneForm}"
+					method="POST">
+					Модель: <br> <input type="text" th:field="*{model_name}"
+						placeholder="model" /> <br /> Цвет: <br> <input type="text"
+						th:field="*{color_name}" placeholder="color" /> <br />
+					Цена: <br>
+					<input type="number" th:field="*{price}" placeholder="price"/> <br />
+					Комментарий: <br>
+					<input type="text"  th:field="*{comment}" placeholder="comment"/> <br />
+					</br>
+					<input type="submit" value="Modify" />
+				</form>
+			</div>
+		</div>
+		<div class="col-2-2">
+			<div class="content"></div>
+		</div>
+	</div>
+</body>
+</body>
+</html>
