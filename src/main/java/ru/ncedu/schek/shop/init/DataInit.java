@@ -46,7 +46,7 @@ public class DataInit implements ApplicationRunner {
 		
 		users.save(user);
 
-	/*	Model m0 = new Model("Generic");
+		Model m0 = new Model("Generic");
 		models.save(m0);
 		Model m1 = new Model("Iphone");
 		models.save(m1);
@@ -80,7 +80,7 @@ public class DataInit implements ApplicationRunner {
 		phones.save(phone12);
 		Phone phone13 = new Phone(m0);
 		phone13.setPicture(p0);
-		phones.save(phone13); */
+		phones.save(phone13); 
 	}
 
 	public void searchForPictures(Phone newPhone) {
