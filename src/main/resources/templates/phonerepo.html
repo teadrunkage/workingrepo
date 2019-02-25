@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <title>Магазин - Я-телефон</title>
 <link rel="stylesheet" type="text/css" media="all"
-	th:href="@{/css/styles.css}" />
+	th:href="@{/css/mystyles.css}" />
 
 </head>
 
@@ -42,7 +42,7 @@
 			<div class="content">
 			
 				<h2>Просто начните покупку!</h2>
-				<img th:src="@{/img/stock_for_repo2.jpg}" width=400px
+				<img th:src="@{/img/stock_for_repo.jpg}" width=400px
 					align="left" />
 				
 			</div>
@@ -51,9 +51,6 @@
 			<div class="content">
 			
 				<h2>Магазин</h2>
-				<img th:src="@{/img/stock_buy.jpg}" width=553px></img>
-				<br>
-				<br>
 				<p th:if="${alreadyThere}">Данная позиция уже лежит в корзине.</p>
 				<div>
 					<p>

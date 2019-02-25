@@ -1,9 +1,7 @@
 package ru.ncedu.schek.shop.utils;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 
 import org.apache.commons.io.IOUtils;
 
