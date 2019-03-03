@@ -8,30 +8,19 @@ import javax.persistence.*;
 import java.util.List;
 
 
-@Data
-@Entity
+
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "PHONEFORREST")
 public class PhoneForRest {
-    @Id
-    @Column(name = "ID",nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long phoneId;
 
-    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "MODEL_ID", nullable = false)
     private ModelForRest model;
 
-    @OneToMany(mappedBy = "phone", cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
     private List<PictureForRest> pictures;
 
-    @Column(name = "PRICE")
     private long price;
 
-    @Column(name = "COLOR")
     private String color;
     
-    @Column(name = "LINK")
     private String link;
 
     public PhoneForRest( ModelForRest model, long price, String color) {
@@ -50,10 +39,9 @@ public class PhoneForRest {
 
     public PhoneForRest(Phone p) {
     	this.link = "http://localhost:8080/guestphonepage?phoneId="+p.getId();
-    	this.phoneId = p.getId();
+    //	this.phoneId = p.getId();
     	this.color = p.getColor();
     	this.price = p.getPrice();
-		//need to set model after
 	}
 	@Override
     public String toString() {

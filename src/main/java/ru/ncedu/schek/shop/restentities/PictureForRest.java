@@ -5,31 +5,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-@Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Table(name = "PICTUREFORREST")
 public class PictureForRest {
-    @Id
-    @Column(name = "ID", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long id;
 
-    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "COLOR")
     private String color;
 
-    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "PHONE_ID", nullable = true)
     private PhoneForRest phone;
 
-    @ManyToOne(cascade = {CascadeType.MERGE}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "MODEL_ID", nullable = false)
     private ModelForRest model;
 
-    @Lob
-    @Column(name = "PICTURE", columnDefinition = "BLOB", nullable = false)
     private byte[] bytes;
 
     public PictureForRest(PhoneForRest phone, String color, String name, byte[] bytes) {
