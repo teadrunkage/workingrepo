@@ -7,6 +7,8 @@ import ru.ncedu.schek.shop.entities.Model;
 import ru.ncedu.schek.shop.entities.Phone;
 
 import javax.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -60,6 +62,12 @@ public class ModelForRest {
 		}
 		this.priceMax = maxprice;
 		this.priceMin = minprice;
+		this.phones = new HashSet<PhoneForRest>();
+		for (Phone p:e.getPhones())  {
+			PhoneForRest pfr = new PhoneForRest(p);
+		//	pfr.setModel(this);
+			this.phones.add(pfr);
+		}
 	}
     
 	@Override

@@ -2,6 +2,7 @@ package ru.ncedu.schek.shop.restentities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import ru.ncedu.schek.shop.entities.Phone;
 
 import javax.persistence.*;
 import java.util.List;
@@ -35,15 +36,22 @@ public class PhoneForRest {
         this.price = price;
         this.color = color;
     }
+    
     public PhoneForRest(ModelForRest model, String color) {
         this.model = model;
         this.color = color;
     }
+    
     public PhoneForRest (){
     }
 
-
-    @Override
+    public PhoneForRest(Phone p) {
+    	this.phoneId = p.getId();
+    	this.color = p.getColor();
+    	this.price = p.getPrice();
+		//need to set model after
+	}
+	@Override
     public String toString() {
         return "Phone{" +
                 "color='" + color + '\'' +
