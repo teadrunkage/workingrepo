@@ -18,13 +18,13 @@ import ru.ncedu.schek.shop.repos.UserRepository;
 
 
 @Controller
-@RequestMapping("/phonepage")
 public class PhonePageController {
 	@Autowired
 	private PhoneRepository phones;
 	@Autowired
 	private UserRepository users;
 	
+	@RequestMapping("/phonepage")
 	@GetMapping
     public String phonepage(Model model, @RequestParam(name="phoneId")long phoneId, Principal principal) {		
 		Optional<Phone> pre_phone = phones.findById(phoneId);
@@ -35,4 +35,14 @@ public class PhonePageController {
 		model.addAttribute("isUser", user.isUser());
         return "phonepage";
     }
+	
+	@RequestMapping("/guestphonepage")
+	@GetMapping
+    public String guestphonepage(Model model, @RequestParam(name="phoneId")long phoneId) {		
+		Optional<Phone> pre_phone = phones.findById(phoneId);
+		Phone phone = pre_phone.get();
+		model.addAttribute("phone", phone);
+        return "guestphonepage";
+    }
+	
 }

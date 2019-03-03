@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Страница телефона - Я-телефон</title>
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/mystyles.css}" />
+</head>
+
+<header>
+	<div class="header-row">
+		<div class="header-left">
+			<a th:href="@{/index}"><img
+				th:src="@{/img/anchor.png}" width="100" height="70" align="left" /></a>
+			<p>Добро пожаловать!</p>
+			<form th:action="@{/login}">
+				<input type="submit" value="Sign In" />
+			</form>
+		</div>
+		<div class="header-middle">
+			<h1>Я-телефон.</h1>
+		</div>
+		<div class="header-right">
+			<p>
+				<a th:href="@{/phonerepo}">Магазин</a>
+			</p>
+		</div>
+	</div>
+</header>
+
+
+<body>
+	<div class="row">
+		<div class="col-1-2">
+			<div class="content">
+				<h2 th:utext="${phone.getModelName()}+| |+${phone.getColor()}">...</h2>
+				<img width="300" height="300"
+					th:src="@{'data:image/jpeg;base64,'+${phone.getPicture().encodeImage()}}"
+					alt="" />
+			</div>
+		</div>
+		<div class="col-2-2">
+			<div class="content">
+				<h2>Описание</h2>
+				<h3>Модель:</h3>
+				<p th:utext="${phone.getModelName()}">...</p>
+				<h3>Цвет:</h3>
+				<p th:utext="${phone.getColor()}">...</p>
+				<h3>Цена:</h3>
+				<p th:utext="${phone.getPrice()}">...</p>
+				<h3>Комментарий:</h3>
+				<p th:utext="${phone.getComment()}">...</p>
+				<p>Чтобы добавить телефон в корзину, необходимо <a th:href="@{/login}">войти</a>.</p>
+			</div>
+		</div>
+	</div>
+</body>
+</body>
+</html>

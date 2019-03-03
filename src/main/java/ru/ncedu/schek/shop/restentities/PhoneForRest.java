@@ -30,6 +30,9 @@ public class PhoneForRest {
 
     @Column(name = "COLOR")
     private String color;
+    
+    @Column(name = "LINK")
+    private String link;
 
     public PhoneForRest( ModelForRest model, long price, String color) {
         this.model = model;
@@ -46,6 +49,7 @@ public class PhoneForRest {
     }
 
     public PhoneForRest(Phone p) {
+    	this.link = "http://localhost:8080/guestphonepage?phoneId="+p.getId();
     	this.phoneId = p.getId();
     	this.color = p.getColor();
     	this.price = p.getPrice();
@@ -89,6 +93,14 @@ public class PhoneForRest {
 	}
 	public void setColor(String color) {
 		this.color = color;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
     
     

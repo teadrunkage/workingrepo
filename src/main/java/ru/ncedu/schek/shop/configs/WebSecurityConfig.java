@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 			//"/models" are here for debug!
-		http.authorizeRequests().antMatchers("/css/**", "/img/**", "/", "/index", "/registration", "/h2-console/**", "/models").permitAll().anyRequest()
+		http.authorizeRequests().antMatchers("/css/**", "/img/**", "/", "/index", "/registration", "/h2-console/**", "/models", "/guestphonepage*").permitAll().anyRequest()
 				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 	}
 

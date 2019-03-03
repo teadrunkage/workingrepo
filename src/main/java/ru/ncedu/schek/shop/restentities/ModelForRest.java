@@ -65,7 +65,6 @@ public class ModelForRest {
 		this.phones = new HashSet<PhoneForRest>();
 		for (Phone p:e.getPhones())  {
 			PhoneForRest pfr = new PhoneForRest(p);
-		//	pfr.setModel(this);
 			this.phones.add(pfr);
 		}
 	}
