@@ -1,5 +1,14 @@
 package ru.ncedu.schek.shop.controllers;
 
+import ru.ncedu.schek.shop.entities.Phone;
+import ru.ncedu.schek.shop.entities.Picture;
+import ru.ncedu.schek.shop.forms.PhoneForm;
+import ru.ncedu.schek.shop.repos.ModelRepository;
+import ru.ncedu.schek.shop.repos.PhoneRepository;
+import ru.ncedu.schek.shop.repos.PictureRepository;
+import ru.ncedu.schek.shop.service.PhoneService;
+import ru.ncedu.schek.shop.utils.ImageUtil;
+
 import java.io.File;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import ru.ncedu.schek.shop.entities.Phone;
-import ru.ncedu.schek.shop.entities.Picture;
-import ru.ncedu.schek.shop.forms.PhoneForm;
-import ru.ncedu.schek.shop.repos.ModelRepository;
-import ru.ncedu.schek.shop.repos.PhoneRepository;
-import ru.ncedu.schek.shop.repos.PictureRepository;
-import ru.ncedu.schek.shop.utils.ImageUtil;
+
 
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
@@ -29,6 +32,8 @@ public class AddPhoneController {
 	private ModelRepository models;
 	@Autowired
 	private PictureRepository pictures;
+	@Autowired
+	private PhoneService phoneService;
 	@Value("${upload.path}")
     private String uploadPath;
 	
@@ -86,9 +91,8 @@ public class AddPhoneController {
 				e.printStackTrace();
 			}
 
-
 		phones.save(newPhone);
-
+		phoneService.createPhone(newPhone);
 		return "redirect:/phonerepo";
 	}
 }

@@ -15,6 +15,7 @@ import ru.ncedu.schek.shop.entities.Phone;
 import ru.ncedu.schek.shop.entities.User;
 import ru.ncedu.schek.shop.repos.PhoneRepository;
 import ru.ncedu.schek.shop.repos.UserRepository;
+import ru.ncedu.schek.shop.service.PhoneService;
 
 
 
@@ -22,6 +23,8 @@ import ru.ncedu.schek.shop.repos.UserRepository;
 public class BulkDeleteController {
 	@Autowired
 	private PhoneRepository phones;
+	@Autowired
+	private PhoneService phoneService;
 	
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/bulkDelete", method=RequestMethod.POST)
@@ -34,6 +37,8 @@ public class BulkDeleteController {
 			}
 			
 			phones.deleteById(id);
+			//удаление из рест
+	        phoneService.deletePhone(id);
 		}
 		return "redirect:/phonerepo";
 	}

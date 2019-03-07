@@ -16,6 +16,7 @@ import ru.ncedu.schek.shop.forms.PhoneForm;
 import ru.ncedu.schek.shop.repos.ModelRepository;
 import ru.ncedu.schek.shop.repos.PhoneRepository;
 import ru.ncedu.schek.shop.repos.PictureRepository;
+import ru.ncedu.schek.shop.service.PhoneService;
 
 
 @Controller
@@ -27,7 +28,7 @@ public class ModifyController {
 	@Autowired
 	private ModelRepository models;
 	@Autowired
-	private PictureRepository pictures;
+	private PhoneService phoneService;
 	
 	private Phone phone;
 	
@@ -65,7 +66,9 @@ public class ModifyController {
 		phone.setPrice(price);
 		phone.setComment(comment);
 		phones.save(phone);
-		
+		//изменение на ресте
+        phoneService.updatePhone(phone);
+        
 		return "redirect:/phonerepo";
 	}
 

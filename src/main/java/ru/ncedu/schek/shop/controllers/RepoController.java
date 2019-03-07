@@ -18,6 +18,7 @@ import ru.ncedu.schek.shop.entities.User;
 import ru.ncedu.schek.shop.forms.PhoneForm;
 import ru.ncedu.schek.shop.repos.PhoneRepository;
 import ru.ncedu.schek.shop.repos.UserRepository;
+import ru.ncedu.schek.shop.service.PhoneService;
 
 @Controller
 @RequestMapping("/phonerepo")
@@ -28,6 +29,9 @@ public class RepoController {
 
 	@Autowired
 	private UserRepository users;
+	
+	@Autowired
+	private PhoneService phoneService;
 	
 	private boolean alreadyThere = false;
 	
@@ -54,6 +58,9 @@ public class RepoController {
 		}
 		
 		phones.deleteById(phoneId);
+		//удаление из рест
+        phoneService.deletePhone(phoneId);
+        
 		Iterable<Phone> allphones = phones.findAll();
 		model.addAttribute("phones", allphones);
 		return "redirect:/phonerepo";
