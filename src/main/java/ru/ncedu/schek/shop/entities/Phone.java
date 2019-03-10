@@ -1,13 +1,12 @@
 package ru.ncedu.schek.shop.entities;
 
 
+import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
-
-import lombok.Data;
-import javax.persistence.*;
-
-import org.hibernate.annotations.CreationTimestamp;
 
 
 @Entity

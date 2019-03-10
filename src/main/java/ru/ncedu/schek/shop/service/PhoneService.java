@@ -6,8 +6,9 @@ import ru.ncedu.schek.shop.entities.Phone;
 public interface PhoneService {
 	
 	public void createPhone(Phone phone);
-	
-	public void deletePhone(long phoneId);
-	
+
+	void deletePhone(Long phoneId);
+
 	public void updatePhone(Phone phone);
+
 }

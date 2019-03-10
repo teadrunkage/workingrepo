@@ -1,9 +1,5 @@
 package ru.ncedu.schek.shop.controllers;
 
-import java.security.Principal;
-import java.util.Optional;
-import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -12,13 +8,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import ru.ncedu.schek.shop.entities.Phone;
 import ru.ncedu.schek.shop.entities.User;
-import ru.ncedu.schek.shop.forms.PhoneForm;
 import ru.ncedu.schek.shop.repos.PhoneRepository;
 import ru.ncedu.schek.shop.repos.UserRepository;
 import ru.ncedu.schek.shop.service.PhoneService;
+
+import java.security.Principal;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/phonerepo")
@@ -56,11 +53,9 @@ public class RepoController {
 		for (User u : phone.getUsers()) {
 			u.deletePhone(phone);
 		}
-		
-		phones.deleteById(phoneId);
 		//удаление из рест
-        phoneService.deletePhone(phoneId);
-        
+		phoneService.deletePhone(phoneId);
+		phones.deleteById(phoneId);
 		Iterable<Phone> allphones = phones.findAll();
 		model.addAttribute("phones", allphones);
 		return "redirect:/phonerepo";
