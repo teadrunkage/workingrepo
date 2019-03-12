@@ -3,6 +3,9 @@ package ru.ncedu.schek.shop.restentities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import ru.ncedu.schek.shop.entities.Phone;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -12,13 +15,13 @@ public class PhoneForRest {
 
     private ModelForRest model;
 
-    private List<PictureForRest> pictures;
-
     private long price;
 
     private String color;
     
     private String link;
+    
+    private String picturelink;
 
     public PhoneForRest( ModelForRest model, long price, String color) {
         this.model = model;
@@ -39,6 +42,18 @@ public class PhoneForRest {
 		this.model= new ModelForRest(p.getModelName(),p.getPrice(), p.getPrice());
     	this.color = p.getColor();
     	this.price = p.getPrice();
+    	//картинка
+    	String picturelink = "";
+		try {
+			picturelink = "data:image/jpeg;base64,"+p.getPicture().encodeImage();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	this.picturelink = picturelink;
 	}
 	@Override
     public String toString() {
@@ -61,12 +76,6 @@ public class PhoneForRest {
 	public void setModel(ModelForRest model) {
 		this.model = model;
 	}
-	public List<PictureForRest> getPictures() {
-		return pictures;
-	}
-	public void setPictures(List<PictureForRest> pictures) {
-		this.pictures = pictures;
-	}
 	public long getPrice() {
 		return price;
 	}
@@ -86,6 +95,14 @@ public class PhoneForRest {
 
 	public void setLink(String link) {
 		this.link = link;
+	}
+
+	public String getPicturelink() {
+		return picturelink;
+	}
+
+	public void setPicturelink(String picturelink) {
+		this.picturelink = picturelink;
 	}
     
     

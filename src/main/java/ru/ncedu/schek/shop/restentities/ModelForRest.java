@@ -22,8 +22,6 @@ public class ModelForRest {
 
     private Set<PhoneForRest> phones;
 
-    private List<PictureForRest> pictures;
-
     private long priceMin;
 
     private long priceMax;
@@ -88,12 +86,7 @@ public class ModelForRest {
 	public void setPhones(Set<PhoneForRest> phones) {
 		this.phones = phones;
 	}
-	public List<PictureForRest> getPictures() {
-		return pictures;
-	}
-	public void setPictures(List<PictureForRest> pictures) {
-		this.pictures = pictures;
-	}
+
 	public long getPriceMin() {
 		return priceMin;
 	}
