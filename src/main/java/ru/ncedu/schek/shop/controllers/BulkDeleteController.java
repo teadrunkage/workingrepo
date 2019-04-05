@@ -27,10 +27,7 @@ public class BulkDeleteController {
 	
 	
 	/**Не работает! - выдает javax.persistence.NonUniqueResultException:
-	 *  query did not return a unique result: 10
-	 * @param model
-	 * @param ids
-	 * @return
+	 * 
 	 */
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/bulkDelete", method=RequestMethod.POST)
