@@ -9,8 +9,8 @@
 <header>
 	<div class="header-row">
 		<div class="header-left">
-			<a th:href="@{/index}"><img
-				th:src="@{/img/anchor.png}" width="100" height="70" align="left" /></a>
+			<a th:href="@{/index}"><img th:src="@{/img/anchor.png}"
+				width="100" height="70" align="left" /></a>
 			<p>Добро пожаловать!</p>
 			<form th:action="@{/login}">
 				<input type="submit" value="Sign In" />
@@ -27,19 +27,25 @@
 <body>
 	<div class="row">
 		<div class="col-1-2">
-				<img th:src="@{/img/4k-wallpaper-blur-bokeh-1260239.jpg}" height="700" width="700" align="left" />
+			<img th:src="@{/img/4k-wallpaper-blur-bokeh-1260239.jpg}"
+				height="700" width="700" align="left" />
 		</div>
 		<div class="col-2-2">
 			<div class="content">
-			<hr>
+				<hr>
 				<h2>Добро пожаловать в Я-телефон!</h2>
-				<p> <a th:href="@{/phonerepo}">Перейти в магазин</a> </p>
-				<p> <a th:href="@{/login}">Войти</a> </p>
-				<p> <a th:href="@{/registration}">Регистрация</a> </p>
+				<p>
+					<a th:href="@{/phonerepo}">Перейти в магазин</a>
+				</p>
+				<p>
+					<a th:href="@{/login}">Войти</a>
+				</p>
+				<p>
+					<a th:href="@{/registration}">Регистрация</a>
+				</p>
 
 			</div>
 		</div>
 	</div>
-</body>
 </body>
 </html>

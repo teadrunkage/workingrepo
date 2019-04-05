@@ -24,10 +24,19 @@ public class BulkDeleteController {
 	@Autowired
 	private PhoneService phoneService;
 	
+	
+	
+	/**Не работает! - выдает javax.persistence.NonUniqueResultException:
+	 *  query did not return a unique result: 10
+	 * @param model
+	 * @param ids
+	 * @return
+	 */
 	@PreAuthorize("hasAuthority('ADMIN')")
 	@RequestMapping(value = "/bulkDelete", method=RequestMethod.POST)
 	public String bulkDelete(Model model, @RequestParam("idChecked") List<Long> ids) {
 		for (Long id:ids) {
+			System.out.println(id);
 			Optional<Phone> pre_phone = phones.findById(id);
 			Phone phone = pre_phone.get();
 			for (User u : phone.getUsers()) {

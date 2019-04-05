@@ -1,5 +1,6 @@
 package ru.ncedu.schek.shop.init;
 
+import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,6 +34,8 @@ public class DataInit implements ApplicationRunner {
 	@Autowired
     private PasswordEncoder passwordEncoder;
 
+
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 
@@ -80,9 +83,26 @@ public class DataInit implements ApplicationRunner {
 		phones.save(phone12);
 		Phone phone13 = new Phone(m0);
 		phone13.setPicture(p0);
-		phones.save(phone13); 
+		phones.save(phone13);
+		
+		createLotsOfModelsForCracker(20);
 	}
 
+	public void createLotsOfModelsForCracker(int numberOfModels) throws InterruptedException {
+		for (int i=0; i < numberOfModels; i++) {
+			Model m = new Model("testmodel"+i);
+			models.save(m);
+			Picture defoltpic = new Picture(m, "defolt");
+			defoltpic.setBytes(ImageUtil.loadImage("/images/no_phone.jpg"));
+			pictures.save(defoltpic);
+			Phone p = new Phone(m, "defolt", (long) 10000+i);
+			p.setPicture(defoltpic);
+			phones.save(p);
+			
+		}
+	}
+	
+	
 	public void searchForPictures(Phone newPhone) {
 		// Model model = newPhone.getModel();
 		Set<Picture> pics = newPhone.getModel().getPictures();
@@ -94,4 +114,5 @@ public class DataInit implements ApplicationRunner {
 
 	}
 
+	
 }

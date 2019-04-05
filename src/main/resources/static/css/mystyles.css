@@ -112,6 +112,12 @@ a:hover {
 	text-decoration: underline;
 }
 
+.floating-chat{
+	padding: 0;
+	height: 410px;
+}
+
+
 table {
 	border-collapse: collapse;
 	color: #000000;

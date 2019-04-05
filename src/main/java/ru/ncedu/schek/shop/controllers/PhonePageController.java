@@ -4,6 +4,8 @@ package ru.ncedu.schek.shop.controllers;
 import java.security.Principal;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,7 +40,16 @@ public class PhonePageController {
 	
 	@RequestMapping("/guestphonepage")
 	@GetMapping
-    public String guestphonepage(Model model, @RequestParam(name="phoneId")long phoneId) {		
+    public String guestphonepage(Model model, @RequestParam(name="phoneId")long phoneId,//
+    		Principal principal, //
+    		HttpServletResponse response) {		
+		try {
+			User user = users.findByUsername(principal.getName());
+			response.sendRedirect("/phonepage?phoneId="+phoneId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Optional<Phone> pre_phone = phones.findById(phoneId);
 		Phone phone = pre_phone.get();
 		model.addAttribute("phone", phone);

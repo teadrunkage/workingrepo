@@ -72,8 +72,6 @@ public class Picture {
 	}
 
 	public void setBytes(byte[] bytes) throws InterruptedException {
-		TimeUnit.SECONDS.sleep(1);
-		System.out.println(bytes);
 		this.bytes = bytes;
 	}
 
