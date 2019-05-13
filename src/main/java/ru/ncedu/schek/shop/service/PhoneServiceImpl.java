@@ -6,18 +6,34 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import ru.ncedu.schek.shop.entities.Phone;
 import ru.ncedu.schek.shop.repos.PhoneRepository;
 import ru.ncedu.schek.shop.restentities.PhoneForRest;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 @Service
 public class PhoneServiceImpl implements PhoneService{
 
     @Autowired
-    PhoneRepository phoneRepository;
+    private PhoneRepository phoneRepository;
+    
+    @Autowired
+    private  EntityManager entityManager;
+    @Autowired
+    private  EntityManagerFactory entityManagerFactory;
+    
+    private final int pageSize = 5;
 
     static final String URL_PHONE_POST = "http://localhost:5030";//Cracker
     static final String URL_PHONE_UPDATE = "http://localhost:5030/modifyphone";//Cracker
@@ -77,4 +93,27 @@ public class PhoneServiceImpl implements PhoneService{
             }
         }
     }
+
+	@Override
+	public Long getNumberOfPages() {
+		TypedQuery<Long> typedQuery = entityManager.createQuery(
+    			"Select count(p) from Phone p", Long.class);
+		Long numberOfSearchPages = typedQuery.getResultList().get(0)/pageSize -1;
+        return numberOfSearchPages;
+	}
+
+	@Override
+	public List<Phone> getPageList(Long page) {
+		CriteriaBuilder builder = entityManagerFactory.getCriteriaBuilder();
+    	CriteriaQuery<Phone> criteriaQuery = builder.createQuery(Phone.class);
+    	Root<Phone> from = criteriaQuery.from(Phone.class);
+    	CriteriaQuery<Phone> select = criteriaQuery.select(from); 
+    	TypedQuery<Phone> typedQuery = entityManager.createQuery(select);
+    			typedQuery.setFirstResult((int) ((page-1)*pageSize));
+    			typedQuery.setMaxResults((int) (pageSize));
+    			List<Phone> pageList = typedQuery.getResultList();
+        return pageList;
+	}
+    
+    
 }

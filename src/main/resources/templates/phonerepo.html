@@ -37,74 +37,81 @@
 
 
 <body>
-	<div class="row">
-		<div class="col-1-2">
-			<div class="content">
-			
-				<h2>Добро пожаловать!</h2>
-				<p>Добро пожаловать в магазин сотовых телефонов "Я-ТЕЛЕФОН".</p>
-				<p>Здесь вы можете приобрести телефоны самых известных марок по разумной цене.</p>
-				<br>
-				<p>Просто добавьте понравившийся товар в корзину.</p>
-			</div>
-		</div>
-		<div class="col-2-2">
-			<div class="content">
-			
-				<h2>Магазин</h2>
-				<p th:if="${alreadyThere}">Данная позиция уже лежит в корзине.</p>
-				<div>
-					<p>
-						<a th:if="${isAdmin}" th:href="@{/addphone}">Добавить телефон</a>
-					</p>
-					<form th:action="@{/bulkDelete}" method="post">
-						<table border="0">
-							<tr>
-								<th th:if="${isAdmin}">check</th>
-								<th>id</th>
-								<th>model</th>
-								<th>creation date</th>
-								<th>color</th>
-								<th>price</th>
-								<th>picture</th>
-								<th th:if="${isUser}">add to basket</th>
-								<th th:if="${isAdmin}">delete</th>
-								<th th:if="${isAdmin}">modify</th>
-							</tr>
-							<tr th:each="phone : ${phones}">
-								<td th:if="${isAdmin}"><input type="checkbox"
-									th:name="idChecked" th:value="${phone.getId()}" /></td>
-								<td th:utext="${phone.getId()}">...</td>
-								<td th:utext="${phone.getModelName()}">...</td>
-								<td th:utext="${phone.getCreationDate()}">...</td>
-								<td th:utext="${phone.getColor()}">...</td>
-								<td th:utext="${phone.getPrice()}">...</td>
-								<td><a th:href="@{/phonepage(phoneId=${phone.getId()})}"
-									class="btn btn-danger"><img width="90" height="90"
-										th:src="@{'data:image/jpeg;base64,'+${phone.getPicture().encodeImage()}}"
-										alt="" /></a></td>
-								<td th:if="${isUser}"><a
-									th:href="@{phonerepo/addtobasket(phoneId=${phone.getId()})}"
-									class="btn btn-danger">Add to basket</a></td>
-								<td><a th:if="${isAdmin}"
-									th:href="@{phonerepo/deletephone(phoneId=${phone.getId()})}"
-									class="btn btn-danger">Delete</a></td>
-								<td><a th:if="${isAdmin}"
-									th:href="@{/modifyphone(phoneId=${phone.getId()})}"
-									class="btn btn-danger">Modify</a></td>
-							</tr>
-						</table>
+			<div class="row">
+				<div class="col-1-2">
+					<div class="content">
+
+						<h2>Добро пожаловать!</h2>
+						<p>Добро пожаловать в магазин сотовых телефонов "Я-ТЕЛЕФОН".</p>
+						<p>Здесь вы можете приобрести телефоны топовых марок
+							по разумной цене.</p>
 						<br>
-						<input type="submit" value="Delete checked" th:if="${isAdmin}" />
-						<br>
-						<br>
-						<br>
-						<br>
-					</form>
+						<p>Просто добавьте понравившийся товар в корзину.</p>
+						<br> <br> <a href="http://localhost:5030"><img
+							th:src="@{/img/partner.png}" width="400"></a>
+					</div>
 				</div>
-			</div>
-		</div>
+				<div class="col-2-2">
+					<div class="content">
+
+						<h2>Магазин</h2>
+						<p th:if="${alreadyThere}">Данная позиция уже лежит в корзине.</p>
+						<div>
+							<p>
+								<a th:if="${isAdmin}" th:href="@{/addphone}">Добавить
+									телефон</a>
+							</p>
+							<form th:action="@{/bulkDelete}" method="post">
+								<table border="0">
+									<tr>
+										<th th:if="${isAdmin}">check</th>
+										<th>id</th>
+										<th>model</th>
+										<th>creation date</th>
+										<th>color</th>
+										<th>price</th>
+										<th>picture</th>
+										<th th:if="${isUser}">add to basket</th>
+										<th th:if="${isAdmin}">delete</th>
+										<th th:if="${isAdmin}">modify</th>
+									</tr>
+									<tr th:each="phone : ${phones}">
+										<td th:if="${isAdmin}"><input type="checkbox"
+											th:name="idChecked" th:value="${phone.getId()}" /></td>
+										<td th:utext="${phone.getId()}">...</td>
+										<td th:utext="${phone.getModelName()}">...</td>
+										<td th:utext="${phone.getCreationDate()}">...</td>
+										<td th:utext="${phone.getColor()}">...</td>
+										<td th:utext="${phone.getPrice()}">...</td>
+										<td><a th:href="@{/phonepage(phoneId=${phone.getId()})}"
+											class="btn btn-danger"><img width="90" height="90"
+												th:src="@{'data:image/jpeg;base64,'+${phone.getPicture().encodeImage()}}"
+												alt="" /></a></td>
+										<td th:if="${isUser}"><a
+											th:href="@{phonerepo/addtobasket(phoneId=${phone.getId()})}"
+											class="btn btn-danger">Add to basket</a></td>
+										<td><a th:if="${isAdmin}"
+											th:href="@{phonerepo/deletephone(phoneId=${phone.getId()})}"
+											class="btn btn-danger">Delete</a></td>
+										<td><a th:if="${isAdmin}"
+											th:href="@{/modifyphone(phoneId=${phone.getId()})}"
+											class="btn btn-danger">Modify</a></td>
+									</tr>
+								</table>
+								<br> <input type="submit" value="Delete checked"
+									th:if="${isAdmin}" /> <br>
+								<div >
+									<a th:href="@{/phonerepo(page=${curPage}-1)}">предыдущая
+										страница</a> <span>... cтраница</span> <span th:utext="${curPage}">...</span>
+									<span>из</span> <span th:utext="${numOfPages}">...</span> <span>...</span>
+									<a th:href="@{/phonerepo(page=${curPage}+1)}">следующая
+										страница</a>
+								</div>
+								<br> <br> <br>
+							</form>
+						</div>
+					</div>
+</div>
 	</div>
 </body>
-
 </html>

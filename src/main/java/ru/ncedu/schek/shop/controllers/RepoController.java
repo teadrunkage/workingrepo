@@ -15,6 +15,7 @@ import ru.ncedu.schek.shop.repos.UserRepository;
 import ru.ncedu.schek.shop.service.PhoneService;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -30,12 +31,20 @@ public class RepoController {
 	@Autowired
 	private PhoneService phoneService;
 	
-	private boolean alreadyThere = false;
+	private boolean alreadyThere = false; //used for adding to basket
 	
 	@GetMapping
-	public String phonerepo(Model model, Principal principal) {
-		Iterable<Phone> allphones = phones.findAll();
+	public String phonerepo(Model model, Principal principal, @RequestParam(name="page") Optional<Long> optpage) {
+		Long page = optpage.orElse((long) 1);
+		Long numOfPages = phoneService.getNumberOfPages();
+		if (page == 0) {page = numOfPages;}
+		if (page == numOfPages+1) {page = (long) 1;}
+		List<Phone> allphones = phoneService.getPageList(page);
 		model.addAttribute("phones", allphones);
+		
+		model.addAttribute("curPage", page);
+		model.addAttribute("numOfPages", numOfPages);
+		
 		model.addAttribute("alreadyThere", alreadyThere);
 		User user = users.findByUsername(principal.getName());
 		model.addAttribute("isAdmin", user.isAdmin());

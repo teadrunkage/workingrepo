@@ -10,8 +10,8 @@
 <header>
 	<div class="header-row">
 		<div class="header-left">
-			<a th:href="@{/index}"><img
-				th:src="@{/img/anchor.png}" width="100" height="70" align="left" /></a>
+			<a th:href="@{/index}"><img th:src="@{/img/anchor.png}"
+				width="100" height="70" align="left" /></a>
 			<p>Добро пожаловать, [[${#httpServletRequest.remoteUser}]]!!</p>
 			<form th:action="@{/logout}" method="post">
 				<input type="submit" value="Sign Out" />
@@ -36,40 +36,43 @@
 
 
 <body>
-	<div class="row">
-		<div class="col-1-2">
-			<div class="content">
-				<h2 th:utext="${phone.getModelName()}+| |+${phone.getColor()}">...</h2>
-				<img width="300" height="300"
-					th:src="@{'data:image/jpeg;base64,'+${phone.getPicture().encodeImage()}}"
-					alt="" />
+			<div class="row">
+				<div class="col-1-2">
+					<div class="content">
+						<h2 th:utext="${phone.getModelName()}+| |+${phone.getColor()}">...</h2>
+						<img width="300" height="300"
+							th:src="@{'data:image/jpeg;base64,'+${phone.getPicture().encodeImage()}}"
+							alt="" />
+					</div>
+				</div>
+				<div class="col-2-2">
+					<div class="content">
+						<h2>Описание</h2>
+						<td><a th:if="${isAdmin}"
+							th:href="@{/modifyphone(phoneId=${phone.getId()})}"
+							class="btn btn-danger">Редактировать</a></td> </br>
+						<td><a th:if="${isAdmin}"
+							th:href="@{phonerepo/deletephone(phoneId=${phone.getId()})}"
+							class="btn btn-danger">Удалить из базы</a></td>
+						<h3>Модель:</h3>
+						<p th:utext="${phone.getModelName()}">...</p>
+						<h3>Цвет:</h3>
+						<p th:utext="${phone.getColor()}">...</p>
+						<h3>Цена:</h3>
+						<p th:utext="${phone.getPrice()}">...</p>
+						<h3>Комментарий:</h3>
+						<p th:utext="${phone.getComment()}">...</p>
+						</br>
+						<td th:if="${isUser}"><a
+							th:href="@{phonerepo/addtobasket(phoneId=${phone.getId()})}"
+							class="btn btn-danger">Добавить в корзину</a></td>
+					</div>
+					<br>
+					<br>
+					<br>
+					<br>
+				</div>
 			</div>
-		</div>
-		<div class="col-2-2">
-			<div class="content">
-				<h2>Описание</h2>
-				<td><a th:if="${isAdmin}"
-					th:href="@{/modifyphone(phoneId=${phone.getId()})}"
-					class="btn btn-danger">Редактировать</a></td>
-				</br>
-				<td><a th:if="${isAdmin}"
-					th:href="@{phonerepo/deletephone(phoneId=${phone.getId()})}"
-					class="btn btn-danger">Удалить из базы</a></td>
-				<h3>Модель:</h3>
-				<p th:utext="${phone.getModelName()}">...</p>
-				<h3>Цвет:</h3>
-				<p th:utext="${phone.getColor()}">...</p>
-				<h3>Цена:</h3>
-				<p th:utext="${phone.getPrice()}">...</p>
-				<h3>Комментарий:</h3>
-				<p th:utext="${phone.getComment()}">...</p>
-				</br>
-				<td th:if="${isUser}"><a
-					th:href="@{phonerepo/addtobasket(phoneId=${phone.getId()})}"
-					class="btn btn-danger">Добавить в корзину</a></td>
-			</div>
-		</div>
-	</div>
-</body>
+
 </body>
 </html>

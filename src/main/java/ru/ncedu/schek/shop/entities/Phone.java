@@ -26,6 +26,7 @@ public class Phone {
     private Date creationDate;
     @Column(name = "COLOR", nullable = true)
     private String color;
+    @Lob
     @Column(name = "COMMENT", nullable = true)
     private String comment;
     @Column(name = "PRICE")
